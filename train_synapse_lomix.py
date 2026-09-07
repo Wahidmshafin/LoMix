@@ -48,6 +48,8 @@ parser.add_argument('--max_epochs', type=int,
                     default=150, help='maximum epoch number to train')
 parser.add_argument('--eval_interval', type=int,
                     default=10, help='evaluation interval in epochs')
+parser.add_argument('--save_interval', type=int,
+                    default=50, help='checkpoint saving interval in epochs')
 parser.add_argument('--batch_size', type=int,
                     default=16, help='batch_size per gpu')
 parser.add_argument('--num_workers', type=int,

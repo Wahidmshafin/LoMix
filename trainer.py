@@ -375,6 +375,7 @@ def trainer_synapse(args, model, snapshot_path, supervision='lomix', operations=
         torch.save(model.state_dict(), save_mode_path)
         
         eval_interval = getattr(args, 'eval_interval', 10)
+        save_interval = getattr(args, 'save_interval', 50)
         if (epoch_num + 1) % eval_interval == 0 or epoch_num >= max_epoch - 1:
             performance = inference(args, model, best_performance)
             if best_performance <= performance:
