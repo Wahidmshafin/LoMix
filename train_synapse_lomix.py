@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
 
-from lib.networks import PVT_CASCADE, EMCADNet
+from lib.networks import EMCADNet  # PVT_CASCADE
 from trainer import trainer_synapse
 
 parser = argparse.ArgumentParser()
@@ -45,15 +45,19 @@ parser.add_argument('--supervision', type=str,
 parser.add_argument('--max_iterations', type=int,
                     default=50000, help='maximum epoch number to train')
 parser.add_argument('--max_epochs', type=int,
-                    default=300, help='maximum epoch number to train')
+                    default=150, help='maximum epoch number to train')
+parser.add_argument('--eval_interval', type=int,
+                    default=10, help='evaluation interval in epochs')
 parser.add_argument('--batch_size', type=int,
-                    default=6, help='batch_size per gpu')
+                    default=16, help='batch_size per gpu')
+parser.add_argument('--num_workers', type=int,
+                    default=2, help='dataloader num_workers')
 parser.add_argument('--base_lr', type=float,  default=0.0001,
                     help='segmentation network learning rate')
 parser.add_argument('--img_size', type=int,
                     default=224, help='input patch size of network input')
 parser.add_argument('--n_gpu', type=int, default=1, help='total gpu')
-parser.add_argument('--deterministic', type=int,  default=1,
+parser.add_argument('--deterministic', type=int,  default=0,
                     help='whether use deterministic training')
 parser.add_argument('--seed', type=int,
                     default=2222, help='random seed')

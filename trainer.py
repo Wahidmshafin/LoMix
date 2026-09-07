@@ -374,17 +374,16 @@ def trainer_synapse(args, model, snapshot_path, supervision='lomix', operations=
         save_mode_path = os.path.join(snapshot_path, 'last.pth')
         torch.save(model.state_dict(), save_mode_path)
         
-        performance = inference(args, model, best_performance)
-        
-        save_interval = 50
-
-        if(best_performance <= performance):
-            best_performance = performance
-            save_mode_path = os.path.join(snapshot_path, 'best.pth')
-            torch.save(model.state_dict(), save_mode_path)
-            logging.info("save model to {}".format(save_mode_path))
-            # Save weights.
-            loss_module.save_weights(os.path.join(snapshot_path,'combinatorial_loss_weights_best.pth'))
+        eval_interval = getattr(args, 'eval_interval', 10)
+        if (epoch_num + 1) % eval_interval == 0 or epoch_num >= max_epoch - 1:
+            performance = inference(args, model, best_performance)
+            if best_performance <= performance:
+                best_performance = performance
+                save_mode_path = os.path.join(snapshot_path, 'best.pth')
+                torch.save(model.state_dict(), save_mode_path)
+                logging.info("save model to {}".format(save_mode_path))
+                # Save weights.
+                loss_module.save_weights(os.path.join(snapshot_path,'combinatorial_loss_weights_best.pth'))
             
         if (epoch_num + 1) % save_interval == 0:
             save_mode_path = os.path.join(snapshot_path, 'epoch_' + str(epoch_num) + '.pth')

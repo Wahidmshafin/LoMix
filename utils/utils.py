@@ -7,15 +7,15 @@ from scipy.ndimage import zoom
 import seaborn as sns
 from PIL import Image 
 import matplotlib.pyplot as plt
-from segmentation_mask_overlay import overlay_masks
+# from segmentation_mask_overlay import overlay_masks
 import matplotlib.colors as mcolors
 
 import SimpleITK as sitk
 import pandas as pd
 
-from thop import profile
-from thop import clever_format
-from ptflops import get_model_complexity_info
+# from thop import profile
+# from thop import clever_format
+# from ptflops import get_model_complexity_info
 
 def powerset(seq):
     """
