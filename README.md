@@ -63,6 +63,11 @@ python -W ignore train_synapse_lomix.py --root_path /path/to/train/data --volume
 ### Testing:
 ```
 cd into LoMix 
+!python test_synapse.py \
+    --volume_path "/path/to/test/data" \
+    --weights_path "/kaggle/input/<checkpoint-folder>/best.pth" \
+    --encoder "pvt_v2_b2" \
+    --img_size 224
 ```
 
 ## Acknowledgement
